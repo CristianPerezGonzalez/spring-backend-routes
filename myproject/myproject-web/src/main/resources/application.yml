@@ -1,0 +1,20 @@
+app:
+    name: Demo App
+server:
+    contextPath: /root
+spring:
+    datasource:
+        name: demodb # Name of the datasource
+        username: root
+        password: 12345678
+        url: jdbc:mysql://localhost:3306/routes_db
+        driverClassName: com.mysql.jdbc.Driver
+        testWhileIdle: true
+        validationQuery: SELECT 1
+    jpa:
+        show-sql: true
+        hibernate:
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
