@@ -1,7 +1,8 @@
 package org.myproject.front.rest;
 
 import org.myproject.dto.RouteDetailDTO;
-import org.springframework.http.ResponseEntity;
+import org.myproject.front.rest.exception.BadRequestException;
+import org.myproject.front.rest.exception.NotFoundException;
 
 
 public interface RoutesDetailController {
@@ -15,9 +16,11 @@ public interface RoutesDetailController {
 	 * @param id
 	 *            - id de la Route
 	 * @return Route
+	 * @throws BadRequestException 
+	 * @throws NotFoundException 
 	 */
 	
-	public ResponseEntity<RouteDetailDTO> getRouteDetail(String id);
+	public RouteDetailDTO getRouteDetail(String id) throws BadRequestException, NotFoundException;
 
 	
 

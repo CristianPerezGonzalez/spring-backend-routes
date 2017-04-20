@@ -1,13 +1,17 @@
 package org.myproject.front.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.dozer.Mapper;
 import org.myproject.RatingsService;
+import org.myproject.dto.RatingDTO;
 import org.myproject.front.rest.RatingsController;
+import org.myproject.front.rest.exception.BadRequestException;
+import org.myproject.front.rest.exception.NoContentException;
+import org.myproject.front.rest.exception.NotFoundException;
 import org.myproject.persistence.entities.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,89 +24,98 @@ import org.springframework.web.bind.annotation.RestController;
 public class RatingsControllerImpl implements RatingsController {
 	
 	private RatingsService ratingsService;
-	
+	private Mapper mapper;
 	@Autowired
-	public RatingsControllerImpl(RatingsService ratingsService) {
+	public RatingsControllerImpl(RatingsService ratingsService, Mapper mapper) {
 		this.ratingsService = ratingsService;
+		this.mapper = mapper;
 	}
 
 
 	@Override
 	@RequestMapping(path = "/ratings", method = RequestMethod.GET)
-	public ResponseEntity<List<Rating>> getAllRatings() {
-		List<Rating> Ratings = ratingsService.getRatings();
+	public List<RatingDTO> getAllRatings() throws NoContentException {
+		List<Rating> ratings = ratingsService.getRatings();
+		List<RatingDTO> result = new ArrayList<>();
+		for (Rating rating : ratings) {
+			result.add(mapper.map(rating, RatingDTO.class));
+		}	
+		if (ratings.isEmpty())
+			throw new NoContentException("No hay valoraciones");
 
-		if (Ratings.isEmpty())
-			return new ResponseEntity<List<Rating>>(HttpStatus.NO_CONTENT);
-
-		return new ResponseEntity<List<Rating>>(Ratings, HttpStatus.OK);
+		return result;
 	}
 
 	@Override
 	@RequestMapping(path = "/rating", method = RequestMethod.GET)
-	public ResponseEntity<Rating> getRating(@RequestParam(value = "id", defaultValue = "1") String id) {
+	public RatingDTO getRating(@RequestParam(value = "id", defaultValue = "1") String id) throws NotFoundException, BadRequestException {
 
 		Long idAsLong;
 		if (id == null)
-			return new ResponseEntity<Rating>(HttpStatus.NOT_FOUND);
+			throw new NotFoundException("No existe la valoracion con id =" + id);
 
 		try {
 			idAsLong = Long.parseLong(id);
 		} catch (NumberFormatException e) {
-			return new ResponseEntity<Rating>(HttpStatus.BAD_REQUEST);
+			throw new BadRequestException("El id introducido no es correcto");
 		}
 
-		Rating Rating = ratingsService.getRating(idAsLong);
-
-		if (Rating == null)
-			return new ResponseEntity<Rating>(HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Rating>(Rating, HttpStatus.OK);
+		Rating rating = ratingsService.getRating(idAsLong);
+		RatingDTO ratingDTO = mapper.map(rating, RatingDTO.class);
+		if (rating == null)
+			throw new BadRequestException("La valoracion introucida está vacía");
+		return ratingDTO;
 	}
 
 	@Override
 	@RequestMapping(path = "/rating", method = RequestMethod.POST)
-	public ResponseEntity<Rating> createRating(@RequestBody Rating Rating) {
-		if (Rating == null)
-			return new ResponseEntity<Rating>(HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Rating>(ratingsService.createRating(Rating), HttpStatus.CREATED);
+	public RatingDTO createRating(@RequestBody Rating rating) throws NotFoundException {
+		if (rating == null)
+			throw new NotFoundException("La valoracion introucida está vacía");
+		Rating result = ratingsService.createRating(rating);
+		RatingDTO ratingDTO = mapper.map(result, RatingDTO.class);
+		return ratingDTO;
 	}
 
 	@Override
 	@RequestMapping(path = "/rating", method = RequestMethod.PUT)
-	public ResponseEntity<Rating> updateRating(@RequestBody Rating Rating) {
+	public RatingDTO updateRating(@RequestBody Rating rating) throws NotFoundException {
 		Rating result = null;
-		if (Rating != null) {
+		if (rating != null) {
 			try {
-				result = ratingsService.updateRating(Rating);
+				result = ratingsService.updateRating(rating);
 			} catch (Exception e) {
-				return new ResponseEntity<Rating>(result, HttpStatus.NOT_FOUND);
+				throw new NotFoundException("No existe la valoracion");
 			}
-			return new ResponseEntity<Rating>(result, HttpStatus.OK);
-		}
-		return new ResponseEntity<Rating>(result, HttpStatus.NOT_FOUND);
+			RatingDTO ratingDTO = mapper.map(result, RatingDTO.class);
+
+			return ratingDTO;
+		}else
+			throw new NotFoundException("No existe la valoracion " + rating);
+
 
 	}
 
 	@Override
 	@RequestMapping(path = "/rating", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteRating(@RequestParam(value = "id", defaultValue = "1") String id) {
+	public void deleteRating(@RequestParam(value = "id", defaultValue = "1") String id) throws BadRequestException, NotFoundException {
 		Long idAsLong;
 		if (id == null)
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			throw new BadRequestException("La ruta valoracion está vacía");
 
 		try {
 			idAsLong = Long.parseLong(id);
 		} catch (NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			throw new BadRequestException("El id introducido no es correcto");
 		}
 
 		try {
 			ratingsService.deleteRating(idAsLong);
 		} catch (Exception e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			throw new NotFoundException("No existe la valoracion con id =" + id);
 		}
 
-		return new ResponseEntity<Void>( HttpStatus.OK);
+		
 	}
 
 	

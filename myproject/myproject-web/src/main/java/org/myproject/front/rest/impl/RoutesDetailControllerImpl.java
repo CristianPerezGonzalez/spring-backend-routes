@@ -4,10 +4,10 @@ import org.dozer.Mapper;
 import org.myproject.RoutesService;
 import org.myproject.dto.RouteDetailDTO;
 import org.myproject.front.rest.RoutesDetailController;
+import org.myproject.front.rest.exception.BadRequestException;
+import org.myproject.front.rest.exception.NotFoundException;
 import org.myproject.persistence.entities.RouteDetail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,26 +33,26 @@ public class RoutesDetailControllerImpl implements RoutesDetailController {
 
 	@Override
 	@RequestMapping(path = "/routedetail", method = RequestMethod.GET)
-	public ResponseEntity<RouteDetailDTO> getRouteDetail(@RequestParam(value = "id", defaultValue = "1") String id) {
+	public RouteDetailDTO getRouteDetail(@RequestParam(value = "id", defaultValue = "1") String id) throws BadRequestException, NotFoundException {
 
 		Long idAsLong;
 		if (id == null)
-			return new ResponseEntity<RouteDetailDTO>(HttpStatus.NOT_FOUND);
+			throw new BadRequestException("El detalle de la ruta introucido está vacío");
 
 		try {
 			idAsLong = Long.parseLong(id);
 		} catch (NumberFormatException e) {
-			return new ResponseEntity<RouteDetailDTO>(HttpStatus.BAD_REQUEST);
+			throw new BadRequestException("El id introducido no es correcto");
 		}
 
-		RouteDetail route = routesService.getRoutesDetail(idAsLong);
+		RouteDetail routeDetail = routesService.getRoutesDetail(idAsLong);
 
 		
-		RouteDetailDTO routeDTO = mapper.map(route, RouteDetailDTO.class);
+		RouteDetailDTO routeDTO = mapper.map(routeDetail, RouteDetailDTO.class);
 		
-		if (route == null)
-			return new ResponseEntity<RouteDetailDTO>(HttpStatus.NOT_FOUND);
-		return new ResponseEntity<RouteDetailDTO>(routeDTO, HttpStatus.OK);
+		if (routeDetail == null)
+			throw new NotFoundException("No existe el detalle de la ruta " + routeDetail);
+		return routeDTO;
 	}
 
 	

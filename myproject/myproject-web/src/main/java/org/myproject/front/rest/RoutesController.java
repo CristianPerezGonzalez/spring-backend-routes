@@ -7,7 +7,6 @@ import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
 import org.myproject.front.rest.exception.NotFoundException;
 import org.myproject.persistence.entities.Route;
-import org.springframework.http.ResponseEntity;
 
 
 public interface RoutesController {
@@ -28,7 +27,7 @@ public interface RoutesController {
 	 * @throws NotFoundException 
 	 */
 	
-	public Route createRoute(Route Route) throws NotFoundException;
+	public RouteDTO createRoute(Route Route) throws NotFoundException;
 
 	/**
 	 * Read route
@@ -50,7 +49,7 @@ public interface RoutesController {
 	 * @throws NotFoundException 
 	 */
 	
-	public Route updateRoute(Route Route) throws NotFoundException;
+	public RouteDTO updateRoute(Route Route) throws NotFoundException;
 
 	/**
 	 * Delete route

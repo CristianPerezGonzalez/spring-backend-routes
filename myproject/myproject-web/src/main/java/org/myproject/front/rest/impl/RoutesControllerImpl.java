@@ -78,15 +78,20 @@ public class RoutesControllerImpl implements RoutesController {
 
 	@Override
 	@RequestMapping(path = "/route", method = RequestMethod.POST)
-	public Route createRoute(@RequestBody Route route) throws NotFoundException {
+	public RouteDTO createRoute(@RequestBody Route route) throws NotFoundException {
 		if (route == null)
 			throw new NotFoundException("La ruta introucida está vacía");
-		return routesService.createRoute(route);
+		Route result = routesService.createRoute(route);
+		
+		RouteDTO routeDTO = mapper.map(result, RouteDTO.class);
+
+		
+		return routeDTO;
 	}
 
 	@Override
 	@RequestMapping(path = "/route", method = RequestMethod.PUT)
-	public Route updateRoute(@RequestBody Route route) throws NotFoundException {
+	public RouteDTO updateRoute(@RequestBody Route route) throws NotFoundException {
 		Route result = null;
 		if (route != null) {
 				try {
@@ -94,8 +99,9 @@ public class RoutesControllerImpl implements RoutesController {
 				} catch (Exception e) {
 					throw new NotFoundException("No existe la ruta");
 				}
-			
-			return result;
+				RouteDTO routeDTO = mapper.map(result, RouteDTO.class);
+
+			return routeDTO;
 		}else
 			throw new NotFoundException("No existe la ruta " + route);
 
