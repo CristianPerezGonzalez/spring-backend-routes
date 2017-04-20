@@ -1,5 +1,6 @@
 package org.myproject.front.rest.exception.handler;
 
+import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.ErrorResponseDTO;
 import org.myproject.front.rest.exception.NoContentException;
 import org.myproject.front.rest.exception.NotFoundException;
@@ -57,7 +58,7 @@ public class RestExceptionHandler {
 	 * @param exception
 	 * @return
 	 */
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler(NoContentException.class)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ResponseBody
 	public ErrorResponseDTO handleNoContentException(NoContentException exception) {
@@ -72,10 +73,10 @@ public class RestExceptionHandler {
 	 * @param exception
 	 * @return
 	 */
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler(BadRequestException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public ErrorResponseDTO handleBadRequestException(NoContentException exception) {
+	public ErrorResponseDTO handleBadRequestException(BadRequestException exception) {
 
 		return new ErrorResponseDTO(HttpStatus.BAD_REQUEST.value(), "Bad Request Error", exception.getMessage());
 

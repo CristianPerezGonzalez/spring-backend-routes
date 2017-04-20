@@ -6,8 +6,10 @@ spring:
     datasource:
         name: demodb # Name of the datasource
         username: root
-        password: 12345678
-        url: jdbc:mysql://localhost:3306/routes_db
+      #  password: 12345678
+        password: H9L6O9E9al2i2s6E
+      #  url: jdbc:mysql://localhost:3306/routes_db
+        url: jdbc:mysql://google/routesdb2?cloudSqlInstance=ionic-161810:europe-west1:routesdb2
         driverClassName: com.mysql.jdbc.Driver
         testWhileIdle: true
         validationQuery: SELECT 1
