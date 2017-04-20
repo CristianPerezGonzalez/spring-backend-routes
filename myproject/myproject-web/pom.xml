@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.myproject</groupId>
 		<artifactId>myproject</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>myproject-web </artifactId>
 	<packaging>war</packaging>
 	<name>myproject-web App</name>
-
+<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<!-- The main class to start by executing java -jar -->
 		<start-class>org.myproject.web.Application</start-class>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.myproject</groupId>
 			<artifactId>myproject-core</artifactId>
-			<version>0.07</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -87,5 +87,5 @@
 	</build>
 
 
-	<version>0.03</version>
+
 </project>
