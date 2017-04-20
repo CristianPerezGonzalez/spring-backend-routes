@@ -49,7 +49,7 @@
 				<version>${dozer.version}</version>
 			</dependency>
 
-			
+
 
 		</dependencies>
 
@@ -92,11 +92,11 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 			</plugin>
 			<plugin>
-			        <groupId>com.google.cloud.tools</groupId>
-			        <artifactId>appengine-maven-plugin</artifactId>
-        			<version>1.2.1</version>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.2.1</version>
 			</plugin>
-			
+
 
 		</plugins>
 

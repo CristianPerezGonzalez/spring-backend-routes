@@ -4,10 +4,10 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="myproject-core-0.07.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/myproject-core/myproject-core">
+        <dependent-module archiveName="myproject-core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/myproject-core/myproject-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="myproject-persistence-0.0.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/myproject-persistence/myproject-persistence">
+        <dependent-module archiveName="myproject-persistence-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/myproject-persistence/myproject-persistence">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/myproject-web/target/classes"/>
