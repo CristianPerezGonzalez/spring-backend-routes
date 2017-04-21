@@ -1,0 +1,12 @@
+---
+applications:
+- name: myproject-web
+  # Fork of https://github.com/cloudfoundry/java-buildpack
+  # For stability, keep your own fork.
+  buildpack: https://github.com/cloudfoundry/java-buildpack
+  memory: 1024M
+  instances: 1
+  # Because the URL will be http://super-mini.cfapps.io/
+  host: myproject-web
+  domain: cfapps.io
+  path: target/myproject-app-web.war
