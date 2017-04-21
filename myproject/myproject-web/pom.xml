@@ -15,7 +15,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<!-- The main class to start by executing java -jar -->
-		<start-class>org.myproject.web.Application</start-class>
+		<start-class>org.myproject.Application</start-class>
 		<debug.port>5007</debug.port>
 	</properties>
 
@@ -79,6 +79,22 @@
 						-Xdebug
 						-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=${debug.port},suspend=n
 					</jvmArguments>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>${start-class}</mainClass>
 				</configuration>
 			</plugin>
 
