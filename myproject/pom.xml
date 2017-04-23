@@ -96,7 +96,11 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>1.2.1</version>
 			</plugin>
-
+			<plugin>
+			   <groupId>com.google.appengine</groupId>
+			   <artifactId>appengine-maven-plugin</artifactId>
+			   <version>1.9.51</version>
+			</plugin>
 
 		</plugins>
 
