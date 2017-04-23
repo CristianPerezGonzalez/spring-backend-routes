@@ -54,6 +54,7 @@ public class Routedetail implements Serializable{
 	private Integer duration;
 	private double latitude;
 	private double longitude;
+	private String coordinates;
 
 	
 	
