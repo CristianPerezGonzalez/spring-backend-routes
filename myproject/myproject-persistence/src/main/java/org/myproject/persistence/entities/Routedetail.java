@@ -27,8 +27,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude={"route","routetype"})
-@Table(name="routedetail")
-public class RouteDetail implements Serializable{
+public class Routedetail implements Serializable{
 	/**
 	 * 
 	 */

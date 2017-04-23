@@ -3,7 +3,7 @@ package org.myproject;
 import java.util.List;
 
 import org.myproject.persistence.entities.Route;
-import org.myproject.persistence.entities.RouteDetail;
+import org.myproject.persistence.entities.Routedetail;
 
 /**
  * TODO crperezg This type ...
@@ -24,7 +24,7 @@ public interface RoutesService {
 	/**
 	 * @return
 	 */
-	public RouteDetail getRoutesDetail(Long id);
+	public Routedetail getRoutesDetail(Long id);
 
 	/**
 	 * Crea una Route

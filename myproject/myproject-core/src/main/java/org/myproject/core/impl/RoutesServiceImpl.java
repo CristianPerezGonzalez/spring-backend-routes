@@ -7,7 +7,7 @@ import org.myproject.RouteTypeDao;
 import org.myproject.RoutesService;
 import org.myproject.RutaDao;
 import org.myproject.persistence.entities.Route;
-import org.myproject.persistence.entities.RouteDetail;
+import org.myproject.persistence.entities.Routedetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +63,7 @@ public class RoutesServiceImpl implements RoutesService {
 	}
 
 	@Override
-	public RouteDetail getRoutesDetail(Long id) {
+	public Routedetail getRoutesDetail(Long id) {
 		return  this.rutaDetailDao.findOne(id);
 	}
 

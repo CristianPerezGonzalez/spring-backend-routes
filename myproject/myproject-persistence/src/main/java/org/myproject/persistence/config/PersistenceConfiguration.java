@@ -12,7 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 	{RatingDao.class,
 	RutaDao.class,
 	RouteDetailDao.class,
-	RouteDetailDao.class,
 	UserDao.class})
 public class PersistenceConfiguration {
 

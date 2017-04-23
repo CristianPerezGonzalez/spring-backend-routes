@@ -15,7 +15,7 @@
   
   
     <mapping> 
-    <class-a>org.myproject.persistence.entities.RouteDetail</class-a>
+    <class-a>org.myproject.persistence.entities.Routedetail</class-a>
     <class-b>org.myproject.dto.RouteDetailDTO</class-b>   
   </mapping> 
    

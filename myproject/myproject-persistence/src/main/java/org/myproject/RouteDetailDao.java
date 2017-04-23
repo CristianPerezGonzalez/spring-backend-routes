@@ -1,6 +1,6 @@
 package org.myproject;
 
-import org.myproject.persistence.entities.RouteDetail;
+import org.myproject.persistence.entities.Routedetail;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @since 0.0.1
  */
 @Repository
-public interface RouteDetailDao extends CrudRepository<RouteDetail, Long> {
+public interface RouteDetailDao extends CrudRepository<Routedetail, Long> {
 
 }

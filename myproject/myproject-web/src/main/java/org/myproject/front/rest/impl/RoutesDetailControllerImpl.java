@@ -6,7 +6,7 @@ import org.myproject.dto.RouteDetailDTO;
 import org.myproject.front.rest.RoutesDetailController;
 import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NotFoundException;
-import org.myproject.persistence.entities.RouteDetail;
+import org.myproject.persistence.entities.Routedetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +45,7 @@ public class RoutesDetailControllerImpl implements RoutesDetailController {
 			throw new BadRequestException("El id introducido no es correcto");
 		}
 
-		RouteDetail routeDetail = routesService.getRoutesDetail(idAsLong);
+		Routedetail routeDetail = routesService.getRoutesDetail(idAsLong);
 
 		
 		RouteDetailDTO routeDTO = mapper.map(routeDetail, RouteDetailDTO.class);
