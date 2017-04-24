@@ -2,11 +2,12 @@ package org.myproject.core.impl;
 
 import java.util.List;
 
+import org.myproject.RatingDao;
 import org.myproject.RouteDetailDao;
-import org.myproject.RouteTypeDao;
 import org.myproject.RoutesService;
 import org.myproject.RutaDao;
 import org.myproject.persistence.entities.Route;
+import org.myproject.persistence.entities.RouteType;
 import org.myproject.persistence.entities.Routedetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,13 @@ public class RoutesServiceImpl implements RoutesService {
 	
 	private RutaDao rutaDao;
 	private RouteDetailDao rutaDetailDao;
-	private RouteTypeDao routeTypeDao;
+	private RatingDao ratingDao;
 
 	@Autowired
-	public RoutesServiceImpl(RutaDao rutaDao, RouteDetailDao routeDetailDao, RouteTypeDao routeTypeDao ) {
+	public RoutesServiceImpl(RutaDao rutaDao, RouteDetailDao routeDetailDao, RatingDao ratingdao ) {
 		this.rutaDao = rutaDao;
 		this.rutaDetailDao = routeDetailDao;
-		this.routeTypeDao = routeTypeDao;
+		this.ratingDao = ratingdao;
 	}
 
 	@Override
@@ -65,6 +66,31 @@ public class RoutesServiceImpl implements RoutesService {
 	@Override
 	public Routedetail getRoutesDetail(Long id) {
 		return  this.rutaDetailDao.findOne(id);
+	}
+
+	@Override
+	public List<Route> getRoutesByStars(Integer stars) {
+		return this.ratingDao.findByStars(stars);
+	}
+
+	@Override
+	public List<Route> getRoutesByDifficulty(Integer difficulty) {
+		return this.rutaDetailDao.findByDifficulty(difficulty);
+	}
+
+	@Override
+	public List<Route> getRoutesByDistance(double distance) {
+		return this.rutaDetailDao.findByDistance(distance);
+	}
+
+	@Override
+	public List<Route> getRoutesByDuration(Integer duration) {
+		return this.rutaDetailDao.findByDuration(duration);
+	}
+
+	@Override
+	public List<Route> getRoutesByRouteType(RouteType routetype) {
+		return this.rutaDetailDao.findByRoutetype(routetype);
 	}
 
 }

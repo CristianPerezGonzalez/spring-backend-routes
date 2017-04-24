@@ -7,6 +7,7 @@ import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
 import org.myproject.front.rest.exception.NotFoundException;
 import org.myproject.persistence.entities.Route;
+import org.myproject.persistence.entities.RouteType;
 
 
 public interface RoutesController {
@@ -61,5 +62,45 @@ public interface RoutesController {
 	 */
 	
 	public void deleteRoute(String id) throws BadRequestException, NotFoundException;
+	
+	/**Obtiene lista de rutas por valoracion
+	 * @param stars
+	 * @return
+	 * @throws NoContentException 
+	 */
+	public List<RouteDTO> getRoutesByRouteType(RouteType routetype) throws NoContentException;
+	
+	/**Obtiene lista de rutas por valoracion
+	 * @param stars
+	 * @return
+	 * @throws NoContentException 
+	 * @throws BadRequestException 
+	 */
+	public List<RouteDTO> getRoutesByStars(String stars) throws NoContentException, BadRequestException;
+	
+	
+	/**Obtiene lista de rutas por dificultad
+	 * @param stars
+	 * @return
+	 * @throws NoContentException 
+	 * @throws BadRequestException 
+	 */
+	public List<RouteDTO> getRoutesByDifficulty(String difficulty) throws NoContentException, BadRequestException;
+	
+	/**Obtiene lista de rutas por distancia
+	 * @param stars
+	 * @return
+	 * @throws NoContentException 
+	 * @throws BadRequestException 
+	 */
+	public List<RouteDTO> getRoutesByDistance(String distance) throws NoContentException, BadRequestException;
+	
+	/**Obtiene lista de rutas por duracion
+	 * @param stars
+	 * @return
+	 * @throws NoContentException 
+	 * @throws BadRequestException 
+	 */
+	public List<RouteDTO> getRoutesByDuration(String duration) throws NoContentException, BadRequestException;
 
 }

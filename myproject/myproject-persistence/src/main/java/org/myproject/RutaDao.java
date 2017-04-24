@@ -1,6 +1,10 @@
 package org.myproject;
 
+import java.util.List;
+
+import org.myproject.persistence.entities.Rating;
 import org.myproject.persistence.entities.Route;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RutaDao extends CrudRepository<Route, Long> {
 
+	
+	
+	
 }

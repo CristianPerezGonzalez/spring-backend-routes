@@ -3,6 +3,7 @@ package org.myproject;
 import java.util.List;
 
 import org.myproject.persistence.entities.Route;
+import org.myproject.persistence.entities.RouteType;
 import org.myproject.persistence.entities.Routedetail;
 
 /**
@@ -13,6 +14,37 @@ import org.myproject.persistence.entities.Routedetail;
  */
 
 public interface RoutesService {
+	
+	/**Obtiene lista de rutas por valoracion
+	 * @param stars
+	 * @return
+	 */
+	public List<Route> getRoutesByRouteType(RouteType routetype);
+	
+	/**Obtiene lista de rutas por valoracion
+	 * @param stars
+	 * @return
+	 */
+	public List<Route> getRoutesByStars(Integer stars);
+	
+	
+	/**Obtiene lista de rutas por dificultad
+	 * @param stars
+	 * @return
+	 */
+	public List<Route> getRoutesByDifficulty(Integer difficulty);
+	
+	/**Obtiene lista de rutas por distancia
+	 * @param stars
+	 * @return
+	 */
+	public List<Route> getRoutesByDistance(double distance);
+	
+	/**Obtiene lista de rutas por duracion
+	 * @param stars
+	 * @return
+	 */
+	public List<Route> getRoutesByDuration(Integer duration);
 	/**
 	 * Obtiene las Routes
 	 * 

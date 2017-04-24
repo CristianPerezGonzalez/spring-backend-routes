@@ -11,8 +11,10 @@ import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
 import org.myproject.front.rest.exception.NotFoundException;
 import org.myproject.persistence.entities.Route;
+import org.myproject.persistence.entities.RouteType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -128,6 +130,135 @@ public class RoutesControllerImpl implements RoutesController {
 		}
 
 		
+	}
+
+
+	@Override
+	@RequestMapping(path = "/routebytype", method = RequestMethod.GET)
+	public List<RouteDTO> getRoutesByRouteType(@RequestParam RouteType routetype) throws NoContentException {
+		List<Route> routes = routesService.getRoutesByRouteType(routetype);
+		List<RouteDTO> result = new ArrayList<>();
+		for (Route route : routes) {
+			result.add(mapper.map(route, RouteDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay rutas");
+
+		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/routebystars", method = RequestMethod.GET)
+	public List<RouteDTO> getRoutesByStars(@RequestParam String stars) throws NoContentException, BadRequestException {
+		Integer starsAsInteger;
+		if (stars == null)
+			throw new BadRequestException("La ruta introducida está vacía");
+
+		try {
+			starsAsInteger = Integer.parseInt(stars);
+		} catch (NumberFormatException e) {
+			throw new BadRequestException("La valoracion introducida no es correcta");
+		}
+		
+		List<Route> routes = routesService.getRoutesByStars(starsAsInteger);
+		List<RouteDTO> result = new ArrayList<>();
+		for (Route route : routes) {
+			result.add(mapper.map(route, RouteDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay rutas");
+
+		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/routebydifficulty", method = RequestMethod.GET)
+	public List<RouteDTO> getRoutesByDifficulty(@RequestParam String difficulty) throws NoContentException, BadRequestException {
+		Integer difficultyAsInteger;
+		if (difficulty == null)
+			throw new BadRequestException("La ruta introducida está vacía");
+
+		try {
+			difficultyAsInteger = Integer.parseInt(difficulty);
+		} catch (NumberFormatException e) {
+			throw new BadRequestException("La dificultad introducida no es correcta");
+		}
+		
+		
+		List<Route> routes = routesService.getRoutesByDifficulty(difficultyAsInteger);
+		List<RouteDTO> result = new ArrayList<>();
+		for (Route route : routes) {
+			result.add(mapper.map(route, RouteDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay rutas");
+
+		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/routebydistance", method = RequestMethod.GET)
+	public List<RouteDTO> getRoutesByDistance(@RequestParam String distance) throws NoContentException, BadRequestException {
+		double durationAsInteger;
+		if (distance == null)
+			throw new BadRequestException("La ruta introducida está vacía");
+
+		try {
+			durationAsInteger = Double.parseDouble(distance);
+		} catch (NumberFormatException e) {
+			throw new BadRequestException("La distancia introducida no es correcta");
+		}
+		
+		
+		List<Route> routes = routesService.getRoutesByDistance(durationAsInteger);
+		List<RouteDTO> result = new ArrayList<>();
+		for (Route route : routes) {
+			result.add(mapper.map(route, RouteDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay rutas");
+
+		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/routebyduration", method = RequestMethod.GET)
+	public List<RouteDTO> getRoutesByDuration(@RequestParam String duration) throws NoContentException, BadRequestException {
+		Integer durationAsInteger;
+		if (duration == null)
+			throw new BadRequestException("La ruta introducida está vacía");
+
+		try {
+			durationAsInteger = Integer.parseInt(duration);
+		} catch (NumberFormatException e) {
+			throw new BadRequestException("La duracion introducida no es correcta");
+		}
+
+		
+		
+		List<Route> routes = routesService.getRoutesByDuration(durationAsInteger);
+		List<RouteDTO> result = new ArrayList<>();
+		for (Route route : routes) {
+			result.add(mapper.map(route, RouteDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay rutas");
+
+		return result;
 	}
 
 	
