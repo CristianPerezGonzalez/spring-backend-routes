@@ -3,6 +3,7 @@ package org.myproject.front.rest;
 import java.util.List;
 
 import org.myproject.dto.MarkerDTO;
+import org.myproject.dto.MarkerINDTO;
 import org.myproject.dto.RouteDTO;
 import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
@@ -112,4 +113,10 @@ public interface RoutesController {
 	 */
 	public List<RouteDTO> getRoutesByDuration(String duration) throws NoContentException, BadRequestException;
 
+	/**Guarda markers
+	 * @param markerdto
+	 * @return
+	 * @throws NotFoundException 
+	 */
+	public MarkerDTO createMarker(MarkerINDTO markerdto) throws NotFoundException;
 }

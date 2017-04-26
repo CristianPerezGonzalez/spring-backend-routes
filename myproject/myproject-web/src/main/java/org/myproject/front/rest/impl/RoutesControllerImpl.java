@@ -6,6 +6,7 @@ import java.util.List;
 import org.dozer.Mapper;
 import org.myproject.RoutesService;
 import org.myproject.dto.MarkerDTO;
+import org.myproject.dto.MarkerINDTO;
 import org.myproject.dto.RouteDTO;
 import org.myproject.front.rest.RoutesController;
 import org.myproject.front.rest.exception.BadRequestException;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8100")
+//@CrossOrigin(origins = "http://localhost:8100")
 public class RoutesControllerImpl implements RoutesController {
 	
 	private RoutesService routesService;
@@ -288,6 +289,22 @@ public class RoutesControllerImpl implements RoutesController {
 			throw new NoContentException("No hay markers");
 
 		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/marker", method = RequestMethod.POST)
+	public MarkerDTO createMarker(@RequestBody MarkerINDTO markerdto) throws NotFoundException {
+		if (markerdto == null)
+			throw new NotFoundException("La ruta introucida está vacía");
+		
+		Marker marker = mapper.map(markerdto, Marker.class);
+		
+		Marker result = routesService.createMarker(marker);
+		
+		MarkerDTO resultdto = mapper.map(result, MarkerDTO.class);
+
+		return resultdto;
 	}
 
 	

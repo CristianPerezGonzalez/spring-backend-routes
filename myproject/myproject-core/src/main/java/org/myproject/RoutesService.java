@@ -22,6 +22,12 @@ public interface RoutesService {
 	 */
 	public List<Marker> getMarkersByRoute(Long route_id);
 	
+	/**Crea markers
+	 * @param marker
+	 * @return marker
+	 */
+	public Marker createMarker(Marker marker);
+	
 	/**Obtiene lista de rutas por valoracion
 	 * @param stars
 	 * @return

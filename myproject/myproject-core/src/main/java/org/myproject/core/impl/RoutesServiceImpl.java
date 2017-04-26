@@ -102,4 +102,9 @@ public class RoutesServiceImpl implements RoutesService {
 		return this.markerDao.findByRoute_id(route_id);
 	}
 
+	@Override
+	public Marker createMarker(Marker marker) {
+		return this.markerDao.save(marker);
+	}
+
 }
