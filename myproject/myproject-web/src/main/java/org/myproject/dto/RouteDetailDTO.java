@@ -16,5 +16,6 @@ public class RouteDetailDTO{
 	private double latitude;
 	private double longitude;
 	private String coordinates;
+	private String description;
 	
 }

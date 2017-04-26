@@ -2,10 +2,12 @@ package org.myproject.core.impl;
 
 import java.util.List;
 
+import org.myproject.MarkerDao;
 import org.myproject.RatingDao;
 import org.myproject.RouteDetailDao;
 import org.myproject.RoutesService;
 import org.myproject.RutaDao;
+import org.myproject.persistence.entities.Marker;
 import org.myproject.persistence.entities.Route;
 import org.myproject.persistence.entities.RouteType;
 import org.myproject.persistence.entities.Routedetail;
@@ -28,12 +30,14 @@ public class RoutesServiceImpl implements RoutesService {
 	private RutaDao rutaDao;
 	private RouteDetailDao rutaDetailDao;
 	private RatingDao ratingDao;
+	private MarkerDao markerDao;
 
 	@Autowired
-	public RoutesServiceImpl(RutaDao rutaDao, RouteDetailDao routeDetailDao, RatingDao ratingdao ) {
+	public RoutesServiceImpl(RutaDao rutaDao, RouteDetailDao routeDetailDao, RatingDao ratingdao, MarkerDao markerDao ) {
 		this.rutaDao = rutaDao;
 		this.rutaDetailDao = routeDetailDao;
 		this.ratingDao = ratingdao;
+		this.markerDao = markerDao;
 	}
 
 	@Override
@@ -91,6 +95,11 @@ public class RoutesServiceImpl implements RoutesService {
 	@Override
 	public List<Route> getRoutesByRouteType(RouteType routetype) {
 		return this.rutaDetailDao.findByRoutetype(routetype);
+	}
+
+	@Override
+	public List<Marker> getMarkersByRoute(Long route_id) {
+		return this.markerDao.findByRoute_id(route_id);
 	}
 
 }

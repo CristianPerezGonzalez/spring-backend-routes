@@ -52,7 +52,11 @@ public class Route implements Serializable {
 	@OneToMany(mappedBy="route", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference(value="ratings_route")
 	private Set<Rating> ratings  = new HashSet<>();
-
+	
+	
+	@OneToMany(mappedBy="route", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference(value="markers_route")
+	private Set<Rating> markers  = new HashSet<>();
 	
 
 }

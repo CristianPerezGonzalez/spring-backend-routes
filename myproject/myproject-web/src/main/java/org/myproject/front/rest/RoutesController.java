@@ -2,6 +2,7 @@ package org.myproject.front.rest;
 
 import java.util.List;
 
+import org.myproject.dto.MarkerDTO;
 import org.myproject.dto.RouteDTO;
 import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
@@ -62,6 +63,14 @@ public interface RoutesController {
 	 */
 	
 	public void deleteRoute(String id) throws BadRequestException, NotFoundException;
+	
+	/**Obtiene markers por ruta
+	 * @param route_id
+	 * @return
+	 * @throws BadRequestException 
+	 * @throws NoContentException 
+	 */
+	public List<MarkerDTO> getMarkersByRoute(String route_id) throws BadRequestException, NoContentException;
 	
 	/**Obtiene lista de rutas por valoracion
 	 * @param stars

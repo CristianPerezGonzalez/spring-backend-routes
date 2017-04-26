@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.dozer.Mapper;
 import org.myproject.RoutesService;
+import org.myproject.dto.MarkerDTO;
 import org.myproject.dto.RouteDTO;
 import org.myproject.front.rest.RoutesController;
 import org.myproject.front.rest.exception.BadRequestException;
 import org.myproject.front.rest.exception.NoContentException;
 import org.myproject.front.rest.exception.NotFoundException;
+import org.myproject.persistence.entities.Marker;
 import org.myproject.persistence.entities.Route;
 import org.myproject.persistence.entities.RouteType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -257,6 +259,33 @@ public class RoutesControllerImpl implements RoutesController {
 		
 		if (result.isEmpty())
 			throw new NoContentException("No hay rutas");
+
+		return result;
+	}
+
+
+	@Override
+	@RequestMapping(path = "/markers", method = RequestMethod.GET)
+	public List<MarkerDTO> getMarkersByRoute(@RequestParam String route_id) throws BadRequestException, NoContentException {
+		Long idAsInteger;
+		if (route_id == null)
+			throw new BadRequestException("El id introducido está vacío");
+
+		try {
+			idAsInteger =Long.parseLong(route_id);
+		} catch (NumberFormatException e) {
+			throw new BadRequestException("El id introducido no es correcto");
+		}
+		
+		List<Marker> markers = routesService.getMarkersByRoute(idAsInteger);
+		List<MarkerDTO> result = new ArrayList<>();
+		for (Marker marker : markers) {
+			result.add(mapper.map(marker, MarkerDTO.class));
+		}		
+		
+		
+		if (result.isEmpty())
+			throw new NoContentException("No hay markers");
 
 		return result;
 	}

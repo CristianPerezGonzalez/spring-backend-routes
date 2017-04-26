@@ -2,6 +2,7 @@ package org.myproject;
 
 import java.util.List;
 
+import org.myproject.persistence.entities.Marker;
 import org.myproject.persistence.entities.Route;
 import org.myproject.persistence.entities.RouteType;
 import org.myproject.persistence.entities.Routedetail;
@@ -14,6 +15,12 @@ import org.myproject.persistence.entities.Routedetail;
  */
 
 public interface RoutesService {
+	
+	/**Lista de markers por ruta
+	 * @param id
+	 * @return
+	 */
+	public List<Marker> getMarkersByRoute(Long route_id);
 	
 	/**Obtiene lista de rutas por valoracion
 	 * @param stars
