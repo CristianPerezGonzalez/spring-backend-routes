@@ -5,13 +5,13 @@ server:
 spring:
     datasource:
         name: demodb # Name of the datasource
-        username: crperezg
-      #  username: root
+      #  username: crperezg
+        username: root
         password: 12345678
       #  password: H9L6O9E9al2i2s6E
-      #  url: jdbc:mysql://localhost:3306/routes_db
+        url: jdbc:mysql://localhost:3306/routes_db
       #  url: jdbc:mysql://google/routes_db?cloudSqlInstance=ionic-161810:europe-west1:routesdb2&socketFactory=com.google.cloud.sql.mysql.SocketFactory
-        url: jdbc:mysql://routesdb.cbfhaut3kkah.us-west-2.rds.amazonaws.com:3306/routes_db
+      #  url: jdbc:mysql://routesdb.cbfhaut3kkah.us-west-2.rds.amazonaws.com:3306/routes_db
         driverClassName: com.mysql.jdbc.Driver
       #  driverClassName: com.mysql.jdbc.GoogleDriver
         testWhileIdle: true
